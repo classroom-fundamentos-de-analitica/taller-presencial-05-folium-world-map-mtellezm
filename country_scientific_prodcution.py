@@ -66,23 +66,25 @@ def plot_world_map(countries):
     m = folium.Map(location=[0, 0], zoom_start=2)
 
     folium.Choropleth(
-        geo_data="https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json",
+        geo_data="world-countries.json",
         data=countries,
         columns=["countries", "count"],
         key_on="feature.properties.name",
         fill_color="Greens",
     ).add_to(m)
 
-df = load_affiliations()
-df = remove_na_rows(df)
-df = add_countries_column(df)
-df = clean_countries(df)
-countries = count_country_frequency(df)
-print (countries.head())
+    m.save("map.html")
 
-# for i in range(5):
-#      print("----")
-#      print(df.Affiliations.values[i])
+def main():
+    """Función principal"""
+    affiliations = load_affiliations()
+    affiliations = remove_na_rows(affiliations)
+    affiliations = add_countries_column(affiliations)
+    affiliations = clean_countries(affiliations)
+    countries = count_country_frequency(affiliations)
+    countries.to_csv("countries.csv")
+    plot_world_map(countries)
 
-
+if __name__ == "__main__":
+    main()
   
