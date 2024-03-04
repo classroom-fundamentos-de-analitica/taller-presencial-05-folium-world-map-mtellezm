@@ -6,7 +6,7 @@ import folium
 def load_affiliations():
     """Carga el archivo scopus-papers.csv y retorna un dataframe con la columna 'Affiliations'"""
     dataframe = pd.read_csv(
-        "https://raw.githubusercontent.com/jdvelasq/datalabs/master/datasets/scopus-papers.csv",
+        "scopus-papers.csv",
         sep=",",
         index_col=None,
     )[["Affiliations"]]
@@ -66,7 +66,7 @@ def plot_world_map(countries):
     m = folium.Map(location=[0, 0], zoom_start=2)
 
     folium.Choropleth(
-        geo_data="https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json",
+        geo_data="world-countries.json",
         data=countries,
         columns=["countries", "count"],
         key_on="feature.properties.name",
