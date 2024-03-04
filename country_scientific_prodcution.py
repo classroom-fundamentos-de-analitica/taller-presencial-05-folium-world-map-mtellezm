@@ -28,14 +28,14 @@ def add_countries_column(affiliations):
     affiliations = affiliations.copy()
     affiliations["countries"] = affiliations["Affiliations"].copy()
     affiliations["countries"] = affiliations["countries"].str.split(";")
-    # affiliations["countries"] = affiliations["countries"].map(
-    #     lambda x: [y.split(",") for y in x]
-    # )
-    # affiliations["countries"] = affiliations["countries"].map(
-    #     lambda x: [y[-1].strip() for y in x]
-    # )
-    # affiliations["countries"] = affiliations["countries"].map(set)
-    # affiliations["countries"] = affiliations["countries"].str.join(", ")
+    affiliations["countries"] = affiliations["countries"].map(
+        lambda x: [y.split(",") for y in x]
+    )
+    affiliations["countries"] = affiliations["countries"].map(
+        lambda x: [y[-1].strip() for y in x]
+    )
+    affiliations["countries"] = affiliations["countries"].map(set)
+    affiliations["countries"] = affiliations["countries"].str.join(", ")
 
     return affiliations
   
@@ -44,7 +44,8 @@ def add_countries_column(affiliations):
 df = load_affiliations()
 df = remove_na_rows(df)
 df = add_countries_column(df)
+df = (df.countries.head())
 
-for i in range(5):
-    print("----")
-    print(df.Affiliations.values[i])
+# for i in range(5):
+#     print("----")
+#     print(df.Affiliations.values[i])
